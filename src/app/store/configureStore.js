@@ -1,0 +1,18 @@
+import { createStore, applyMiddleware, compose } from 'redux'
+
+export const configureStore = (preloadedState) => {
+	const middleWares = []
+	const middlewareEnhancer = applyMiddleware(...middlewares);
+
+	const storeEnhancers = [middlewareEnhancer];
+
+	const composedEnhancer = compose(...storeEnhancers);
+
+	const store = createStore(
+		rootReducer,
+		preloadedState,
+		composedEnhancer
+	)
+
+	return store
+}
