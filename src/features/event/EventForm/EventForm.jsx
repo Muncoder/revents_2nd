@@ -10,6 +10,7 @@ import TextInput from '../../../app/common/form/TextInput'
 import TextArea from '../../../app/common/form/TextArea'
 import SelectInput from '../../../app/common/form/SelectInput'
 import DateInput from '../../../app/common/form/DateInput'
+import PlaceInput from '../../../app/common/form/PlaceInput'
 
 const mapState = (state, ownProps) => {
 	const eventId = ownProps.match.params.id;
@@ -84,8 +85,8 @@ class EventForm extends Component {
 							<Field name='description' type='text' component={TextArea} rows={3} placeholder='Tell us your event about' />
 
 							<Header sub color='teal' content='Event location details'/>
-							<Field name='city' type='text' component={TextInput} placeholder='Event city' />
-							<Field name='venue' type='text' component={TextInput} placeholder='Event venue' />
+							<Field name='city' type='text' component={PlaceInput} options={{types: ['(cities)']}} placeholder='Event city' />
+							<Field name='venue' type='text' options={{ types: ['establishment'] }} component={PlaceInput} placeholder='Event venue' />
 							<Field name='date' type='text' 
 								component={DateInput} 
 								dateFormat='YYYY-MM-DD HH:mm' 
