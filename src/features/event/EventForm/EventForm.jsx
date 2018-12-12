@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 import moment from 'moment'
-import { geocodeByAddress, getLatLan } from 'react-places-autocomplete'
+import { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 import Script from 'react-load-script'
 import { composeValidators, combineValidators, isRequired, hasLengthGreaterThan } from 'revalidate'
 import cuid from 'cuid'
@@ -68,7 +68,7 @@ class EventForm extends Component {
 	
 	handleCitySelect = (selectedCity) => {
 		geocodeByAddress(selectedCity)
-			.then(results => getLatLan(results[0]))
+			.then(results => getLatLng(results[0]))
 			.then(latlng => {
 				this.setState({
 					cityLatLng: latlng
@@ -79,8 +79,22 @@ class EventForm extends Component {
 			})
 	}
 
+	handleVenueSelect = (selectedVenue) => {
+		geocodeByAddress(selectedVenue)
+			.then(results => getLatLng(results[0]))
+			.then(latlng => {
+				this.setState({
+					venueLatLng: latlng
+				})
+			})
+			.then(() => {
+				this.props.change('venue', selectedVenue)
+			})
+	}
+	
 	onFormSubmit = values => {
 		values.date = moment(values.date).format()
+		values.venueLatLng = this.state.venueLatLng
 		if (this.props.initialValues.id) {
 			this.props.updateEvent(values)
 			this.props.history.goBack();
@@ -124,7 +138,9 @@ class EventForm extends Component {
 									types: ['establishment'] 
 									}} 
 								component={PlaceInput} 
-								placeholder='Event venue' /> }
+								placeholder='Event venue'  
+								onSelect={this.handleVenueSelect}/>
+							}
 
 							<Field name='date' type='text' 
 								component={DateInput} 
