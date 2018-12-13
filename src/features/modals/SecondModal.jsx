@@ -7,17 +7,17 @@ const actions = {
 	closeModal
 }
 
-const TestModal = ({ closeModal }) => {
+const SecondModal = ({ closeModal }) => {
 	return (
 		<Modal closeIcon="close" open={true} onClose={closeModal}>
-			<Modal.Header>Test Modal</Modal.Header>
+			<Modal.Header>Second Modal</Modal.Header>
 			<Modal.Content>
 				<Modal.Description>
-					<p>Test Modal... nothing to see here</p>
+					<p>Second Modal... nothing to see here</p>
 				</Modal.Description>
 			</Modal.Content>
 		</Modal>
 	)
 }
 
-export default connect(null, actions)(TestModal)
+export default connect(null, actions)(SecondModal)
