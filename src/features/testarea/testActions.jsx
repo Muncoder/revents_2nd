@@ -30,13 +30,13 @@ export const finishCounterAction = () => {
 }
 
 const delay = (ms) => {
-	return new promise(resolve => setTimeout(resolve, ms))
+	return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 export const incrementAsync = () => {
 	return async dispatch => {
 		dispatch(startCounterAction())
-		await delay(1000);
+		await delay(2000);
 		dispatch({type: INCREMENT_COUNTER})
 		dispatch(finishCounterAction())
 	}
@@ -45,7 +45,7 @@ export const incrementAsync = () => {
 export const decrementAsync = () => {
 	return async dispatch => {
 		dispatch(startCounterAction())
-		await delay(1000);
+		await delay(2000);
 		dispatch({type: DECREMENT_COUNTER})
 		dispatch(finishCounterAction())
 	}
