@@ -2,7 +2,7 @@ import {
 	ASYNC_ACTION_START, 
 	ASYNC_ACTION_FINISH, 
 	ASYNC_ACTION_ERROR 
-} from authConstants
+} from './asyncConstants'
 
 export const asyncActionStart = () => {
 	return {
