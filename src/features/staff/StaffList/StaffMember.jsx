@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Segment, Item, Icon, List, Button } from 'semantic-ui-react'
+import { Segment, Item, Button } from 'semantic-ui-react'
 
 class StaffMember extends Component {
 	render() {

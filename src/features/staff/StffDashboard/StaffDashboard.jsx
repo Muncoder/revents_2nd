@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import { connect } from 'react-redux'
 import { Grid, Button } from 'semantic-ui-react';
 import cuid from 'cuid';
@@ -6,10 +7,36 @@ import StaffList from '../StaffList/StaffList'
 import StaffForm from '../StaffForm/StaffForm'
 
 const mapState = (state) => ({
+	// axios.get('http://192.168.0.6:3000/staffs.json')
+	// 	.then(response => response.json())
+	// 	.then(response => {
+	// 		this.setState({
+	// 			staffs: response.data
+	// 		})
+	// 	})
+	// .catch(function (error) {
+	// 	console.log(error)
+	// })
 	staffs: state.staffs
 })
 
 class StaffDashboard extends Component {
+
+	componentDidMount() {
+		axios.get('http://192.168.0.6:3000/staffs.json')
+			// .then(response => response.json())
+			.then(response => {
+				this.setState({
+					staffs: response.data
+				})
+				console.log(response.data)
+			})
+		.catch(function (error) {
+			console.log(error)
+		})
+
+	}
+
 	state = {
 		isOpen: false,
 		selectedStaff: null
