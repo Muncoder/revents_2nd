@@ -11,6 +11,9 @@ import EventDetailedPage from '../../features/event/EventDetailed/EventDetailedP
 import HomePage from '../../features/home/HomePage'
 import TestComponent from '../../features/testarea/TestComponent'
 
+import StaffDashboard from '../../features/staff/StffDashboard/StaffDashboard'
+import StaffForm from '../../features/staff/StaffForm/StaffForm'
+
 class App extends Component {
   render() {
     return (
@@ -33,6 +36,9 @@ class App extends Component {
 									<Route path='/profile/:id' component={UserDetailedPage} />
 									<Route path='/settings' component={SettingsDashboard} />
 									<Route path='/createEvent' component={EventForm} />
+
+									<Route path='/staffs' component={StaffDashboard} />
+									<Route path='/createStaff' component={StaffForm} />
 								</Switch>
 							</Container>
 						</div>
