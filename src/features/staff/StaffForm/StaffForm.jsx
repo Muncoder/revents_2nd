@@ -29,7 +29,7 @@ class StaffForm extends Component {
 	}
 
 	onFormSubmit = (evt) => {
-		evt.prstaffDefault();
+		evt.preventDefault();
 		if (this.state.staff.id) {
 			this.props.updateStaff(this.state.staff)
 		} else {

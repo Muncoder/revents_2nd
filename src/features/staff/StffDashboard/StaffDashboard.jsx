@@ -5,6 +5,7 @@ import { Grid, Button } from 'semantic-ui-react';
 import cuid from 'cuid';
 import StaffList from '../StaffList/StaffList'
 import StaffForm from '../StaffForm/StaffForm'
+import { createStaff, updateStaff, deleteStaff } from '../staffActions'
 
 const mapState = (state) => ({
 	// axios.get('http://192.168.0.6:3000/staffs.json')
@@ -19,6 +20,12 @@ const mapState = (state) => ({
 	// })
 	staffs: state.staffs
 })
+
+const actions = {
+	createStaff,
+	updateStaff,
+	deleteStaff
+}
 
 class StaffDashboard extends Component {
 
@@ -56,14 +63,8 @@ class StaffDashboard extends Component {
 	}
 
 	handleUpdateStaff = (updatedStaff) => {
+		this.props.updateStaff(updateStaff)
 		this.setState({
-			staffs: this.state.staffs.map(staff => {
-				if (staff.id === updatedStaff.id) {
-					return Object.assign({}, updatedStaff);
-				} else {
-					return staff
-				}
-			}),
 			isOpen: false,
 			selectedStaff: null
 		})
@@ -78,18 +79,14 @@ class StaffDashboard extends Component {
 
 	handleCreateStaff = (newStaff) => {
 		newStaff.id = cuid();
-		const updatedStaffs = [...this.state.staffs, newStaff];
+		this.props.createStaff(newStaff)
 		this.setState({
-			staffs: updatedStaffs,
 			isOpen: false
 		})
 	}
 	
 	handleDeleteStaff = (staffId) => () => {
-		const updatedStaffs = this.state.staffs.filter(e => e.id !== staffId);
-		this.setState({
-			staffs: updatedStaffs
-		})
+		this.props.deleteStaff(staffId)
 	}
 
 	render() {
@@ -111,4 +108,4 @@ class StaffDashboard extends Component {
 	}
 }
 
-export default connect(mapState)(StaffDashboard);
+export default connect(mapState, actions)(StaffDashboard);
